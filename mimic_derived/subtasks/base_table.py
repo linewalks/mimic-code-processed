@@ -1,42 +1,44 @@
-from main.uploaders.mdwalks.subtasks.base_task import BaseTask
-from main.uploaders.common.query import load_sql
+from mimic_derived.subtasks.base_task import BaseTask
+from common.query import load_sql
 import os
 import time
 
 
 class BaseTable(BaseTask):
-  def __init__(self, conn, schema_name, sql_path, file_path):
-    super().__init__(conn, schema_name, sql_path, file_path)
+  preliminary_tables = [
+    "icustay_times",
+    "icustay_hours",
+    "ventilation_classification",
+    "ventilation_durations",
+    "echo_data",
+    "weight_durations",
+    "norepinephrine_dose",
+    "epinephrine_dose",
+    "dopamine_dose",
+    "dobutamine_dose"
+  ]
 
-  def execute(self):
+  pivoted_tables = [
+    "pivoted_bg",
+    "pivoted_bg_art",
+    "pivoted_lab",
+    "pivoted_vital",
+    "pivoted_fio2",
+    "pivoted_gcs",
+    "pivoted_uo",
+    # "pivoted_sofa" TODO
+  ]
+
+  def __init__(self, conn, sql_path, mimic_clinical, mimic_derived):
+    super().__init__(conn, sql_path, mimic_clinical, mimic_derived)
+
+  def execute_query(self):
     print("\n====================Start Making All Tables====================\n")
-    tables_to_create = [
-        # Auxiliary Tables (Preliminary Data Extraction)
-        "icustay_times",
-        "icustay_hours",
-        "ventilation_classification",
-        "ventilation_durations",
-        "echo_data",
-        "weight_durations",
-        "norepinephrine_dose",
-        "epinephrine_dose",
-        "dopamine_dose",
-        "dobutamine_dose",
-        # Feature Data Tables
-        "pivoted_bg",
-        "pivoted_bg_art",
-        "pivoted_lab",
-        "pivoted_vital",
-        "pivoted_fio2",
-        "pivoted_gcs",
-        "pivoted_uo",
-        "pivoted_sofa"
-    ]
-    for tablename in tables_to_create:
+    for tablename in self.preliminary_tables+self.pivoted_tables:
       start_time = time.time()
       print(f"Start making {tablename} table!")
       query = load_sql(os.path.join(self.sql_path, "base_table", f"{tablename}_table.sql"),
-                       schema_name=self.schema_name)
+                       mimic_derived=self.mimic_derived)
       self.cursor.execute(query)
       print(f"Finished making {tablename} table!")
       end_time = time.time()

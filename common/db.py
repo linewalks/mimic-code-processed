@@ -1,20 +1,21 @@
+from common.config import read_config
 import psycopg2
-
-from main.uploaders.common.config import read_config
+import os
 
 
 class ExtractorDB:
-  def __init__(self, mimicdir=None):
-    cfg = read_config(mimicdir)
+  def __init__(self, inidir=None):
+    if inidir:
+      cfg = read_config(inidir)
+    else:
+      cfg = read_config(f"{os.getcwd()}/mimicdb.ini")
 
-    host = cfg.config['PSQL_HOST']
-    password = cfg.config['PSQL_PASSWORD']
-    dbname = cfg.config['PSQL_DBNAME']
-    user = cfg.config['PSQL_USER']
+    host = cfg["mimicdb"]["PSQL_HOST"]
+    password = cfg["mimicdb"]["PSQL_PASSWORD"]
+    dbname = cfg["mimicdb"]["PSQL_DBNAME"]
+    user = cfg["mimicdb"]["PSQL_USER"]
 
     self.connect_to_db(host, password, dbname, user)
-
-    self.mimic_derived = cfg.config['SCHEMA_MIMIC_DERIVED']
 
   def connect_to_db(self, host, password, dbname, user):
     try:

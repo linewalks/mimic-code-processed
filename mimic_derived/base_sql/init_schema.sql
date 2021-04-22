@@ -1,2 +1,2 @@
-DROP SCHEMA IF EXISTS {schema_name} CASCADE;
-CREATE SCHEMA {schema_name};
+DROP SCHEMA IF EXISTS {mimic_derived} CASCADE;
+CREATE SCHEMA {mimic_derived};

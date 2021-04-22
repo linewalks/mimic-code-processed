@@ -1,7 +1,7 @@
 class BaseTask:
-  def __init__(self, conn, schema_name, sql_path, file_path):
+  def __init__(self, conn, sql_path, mimic_clinical, mimic_derived):
     self.conn = conn
     self.cursor = conn.cursor()
-    self.schema_name = schema_name
     self.sql_path = sql_path
-    self.file_path = file_path
+    self.mimic_clinical = mimic_clinical
+    self.mimic_derived = mimic_derived

@@ -1,5 +1,5 @@
 class BaseExtractor:
-  def __init__(self, db):
+  def __init__(self, db, mimic_clinical):
     self.db = db
     self.conn = db.conn
-    self.cursor = self.conn.cursor()
+    self.mimic_clinical = mimic_clinical
