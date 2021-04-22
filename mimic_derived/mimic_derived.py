@@ -3,6 +3,7 @@ from mimic_derived.subtasks.init_schema import InitSchema
 from mimic_derived.subtasks.base_table import BaseTable
 from mimic_derived.subtasks.extract_preliminary_features import ExtractPreliminaryFeatures
 from mimic_derived.subtasks.extract_pivoted_features import ExtractPivotedFeatures
+from psycopg2 import sql
 import time
 
 
@@ -10,7 +11,7 @@ class MimicDerivedExtractor(BaseExtractor):
   def __init__(self, db, mimic_clinical, mimic_derived):
     super().__init__(db, mimic_clinical)
     self.sql_path = "./mimic_derived/base_sql"
-    self.mimic_derived = mimic_derived
+    self.mimic_derived = sql.Identifier(mimic_derived)
 
   def extract(self):
     start_time = time.time()

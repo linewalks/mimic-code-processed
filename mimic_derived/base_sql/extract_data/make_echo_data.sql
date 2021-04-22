@@ -12,7 +12,7 @@ select ROW_ID
   , to_timestamp
   (
       to_char(chartdate, '%Y-%m-%d')
-      || substring(ne.text from 'Date/Time: .+? at ([0-9]+:[0-9]{2})')
+      || substring(ne.text from 'Date/Time: .+? at ([0-9]+:[0-9]{{2}})')
       || ':00',
       '%Y-%m-%d%H:%M:%S'
    ) AS charttime
