@@ -331,6 +331,7 @@ WITH co AS
     ROWS BETWEEN 23 PRECEDING AND 0 FOLLOWING
   )
 )
+insert into {mimic_derived}.pivoted_sofa
 select * from score_final
 where hr >= 0
 order by icustay_id, hr;

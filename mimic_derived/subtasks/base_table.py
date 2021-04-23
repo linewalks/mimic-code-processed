@@ -26,7 +26,7 @@ class BaseTable(BaseTask):
     "pivoted_fio2",
     "pivoted_gcs",
     "pivoted_uo",
-    # "pivoted_sofa" TODO
+    "pivoted_sofa"
   ]
 
   def __init__(self, conn, sql_path, mimic_clinical, mimic_derived):
