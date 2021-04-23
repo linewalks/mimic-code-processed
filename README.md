@@ -2,9 +2,13 @@
 
 How To Execute:
 
-1. Make a copy of default.ini and rename as mimicdb.ini
-2. Edit MIMIC3 Database access information in mimicdb.ini
-3. Execute below command:
+1. Install requirements (in virtualenv if possible) using
+```
+pip install -r requirements.txt
+```
+2. Make a copy of default.ini and rename as mimicdb.ini
+3. Edit MIMIC3 Database access information in mimicdb.ini
+4. Execute below command:
 ```
 python run_extractor.py {source_schema} {dest_schema}
 ```
