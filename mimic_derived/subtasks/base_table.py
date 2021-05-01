@@ -15,7 +15,8 @@ class BaseTable(BaseTask):
     "norepinephrine_dose",
     "epinephrine_dose",
     "dopamine_dose",
-    "dobutamine_dose"
+    "dobutamine_dose",
+    "vasopressor_durations"
   ]
 
   pivoted_tables = [
