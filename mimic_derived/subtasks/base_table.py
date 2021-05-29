@@ -18,7 +18,9 @@ class BaseTable(BaseTask):
     "dobutamine_dose",
     "vasopressor_durations",
     "colloid_bolus",
-    "crystalloid_bolus"
+    "crystalloid_bolus",
+    "urine_output",
+    "abx_prescriptions"
   ]
 
   pivoted_tables = [
@@ -29,7 +31,8 @@ class BaseTable(BaseTask):
     "pivoted_fio2",
     "pivoted_gcs",
     "pivoted_uo",
-    "pivoted_sofa"
+    "pivoted_sofa",
+    "kdigo_uo"
   ]
 
   def __init__(self, conn, sql_path, mimic_clinical, mimic_derived):
