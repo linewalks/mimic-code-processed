@@ -1,5 +1,5 @@
 configparser == 5.0.2
 
-pip == 21.0.1
+pip == 21.1.2
 
 psycopg2-binary == 2.8.6
